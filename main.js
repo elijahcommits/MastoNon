@@ -1,6 +1,6 @@
 /** @format */
 
-const accessToken = "_lUKYszwpF6y9Ik4DHtFrISl3U461jrFH2MBx_jVrJ4";
+const accessToken = "pe1RLGng56CQy3mXgJH8MiVOEN79lUS5DKEus1-8DbE";
 let mastodonInstanceURL = "";
 
 async function fetchAPI(url) {
