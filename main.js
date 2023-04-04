@@ -1,7 +1,7 @@
 /** @format */
 
 const accessToken = "_lUKYszwpF6y9Ik4DHtFrISl3U461jrFH2MBx_jVrJ4";
-const mastodonInstanceURL = "https://indieweb.social";
+let mastodonInstanceURL = "";
 
 async function fetchAPI(url) {
   const response = await fetch(url, {
@@ -25,18 +25,19 @@ async function getNonFollowers(userId, mastodonInstanceURL) {
     (user) => !followers.some((follower) => follower.id === user.id)
   );
 
-  displayNonFollowers(nonFollowers);
+  displayNonFollowers(nonFollowers, mastodonInstanceURL);
 }
 
-function displayNonFollowers(nonFollowers) {
+function displayNonFollowers(nonFollowers, mastodonInstanceURL) {
   const list = document.getElementById("non-followers-list");
-  list.innerHTML = "";
+  list.innerHTML = '';
 
-  nonFollowers.forEach((user) => {
+  nonFollowers.forEach(user => {
     const listItem = document.createElement("li");
     const link = document.createElement("a");
-    link.href = user.url;
-    link.textContent = `@${user.username}`;
+    const remoteUsername = user.acct;
+    link.href = `${mastodonInstanceURL}/@${remoteUsername}`;
+    link.textContent = `@${remoteUsername}`;
     listItem.textContent = `${user.display_name} (`;
     listItem.appendChild(link);
     listItem.appendChild(document.createTextNode(")"));
@@ -44,13 +45,12 @@ function displayNonFollowers(nonFollowers) {
   });
 }
 
+
 function onSubmit(event) {
   event.preventDefault();
   const userId = document.getElementById("user-id-input").value;
   const instanceInput = document.getElementById("instance-input").value.trim();
-  const mastodonInstanceURL = instanceInput.startsWith("http")
-    ? instanceInput
-    : `https://${instanceInput.replace(/^@/, "")}`;
+  const mastodonInstanceURL = instanceInput.startsWith("http") ? instanceInput : `https://${instanceInput.replace(/^@/, "")}`;
   getNonFollowers(userId, mastodonInstanceURL);
 }
 
