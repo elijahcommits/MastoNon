@@ -10,17 +10,21 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4634700877036241" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>MastoNon</h1>
-  <h2>Discover who isn't following you back on Mastodon!</h2>
-  <form id="user-id-form">
-    <label for="user-id-input">Enter your User ID <a href="https://prouser123.me/mastodon-userid-lookup/">(found here)</a>:</label>
-    <input type="text" id="user-id-input" required>
-    <br>
-    <label for="instance-input">Enter your Mastodon instance (e.g., indieweb.social):</label>
-    <input type="text" id="instance-input" required>
-    <br>
-    <button type="submit">Check Non-Followers</button>
-  </form>
-  <ul id="non-followers-list"></ul>
+  <main class="wrapper">
+    <h1>MastoNon</h1>
+    <h2>Discover who isn't following you back on Mastodon!</h2>
+    <form id="user-id-form">
+      <div class="form-item form-item--user" id="form-item--user-id">
+        <label for="user-id-input">Enter your User ID <a href="https://prouser123.me/mastodon-userid-lookup/">(found here)</a>:</label>
+        <input type="text" id="user-id-input" required>
+      </div>
+      <div class="form-item form-item--user" id="form-item--mastodon-instance">
+        <label for="instance-input">Enter your Mastodon instance (e.g., indieweb.social):</label>
+        <input type="text" id="instance-input" required>
+      </div>
+      <button id="checkNonFollowers" type="submit">Check Non-Followers</button>
+    </form>
+    <ul id="non-followers-list"></ul>
+  </main>
 </body>
 </html>

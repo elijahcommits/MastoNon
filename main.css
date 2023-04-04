@@ -11,6 +11,11 @@ body {
   padding: 20px;
 }
 
+.wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 h1 {
   font-size: 2rem;
   font-weight: bold;
@@ -27,7 +32,12 @@ form {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+}
+
+.form-item--user {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
 
 label {
@@ -42,7 +52,6 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
   flex-grow: 1;
-  margin-bottom: 10px;
 }
 
 button {
@@ -58,6 +67,10 @@ button {
 
 button:hover {
   background-color: #555;
+}
+
+#checkNonFollowers {
+  display: block;
 }
 
 ul {
@@ -76,20 +89,4 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-@media screen and (max-width: 600px) {
-  form {
-    flex-direction: column;
-  }
-
-  input {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-
-  button {
-    margin-left: 0;
-    width: 100%;
-  }
 }
