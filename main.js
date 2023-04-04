@@ -1,0 +1,60 @@
+/** @format */
+
+const accessToken = "_lUKYszwpF6y9Ik4DHtFrISl3U461jrFH2MBx_jVrJ4";
+const mastodonInstanceURL = "https://indieweb.social";
+
+async function fetchAPI(url) {
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  return await response.json();
+}
+
+async function getNonFollowers(userId, mastodonInstanceURL) {
+  const followingURL = `${mastodonInstanceURL}/api/v1/accounts/${userId}/following`;
+  const followersURL = `${mastodonInstanceURL}/api/v1/accounts/${userId}/followers`;
+
+  const following = await fetchAPI(followingURL);
+  const followers = await fetchAPI(followersURL);
+
+  const nonFollowers = following.filter(
+    (user) => !followers.some((follower) => follower.id === user.id)
+  );
+
+  displayNonFollowers(nonFollowers);
+}
+
+function displayNonFollowers(nonFollowers) {
+  const list = document.getElementById("non-followers-list");
+  list.innerHTML = "";
+
+  nonFollowers.forEach((user) => {
+    const listItem = document.createElement("li");
+    const link = document.createElement("a");
+    link.href = user.url;
+    link.textContent = `@${user.username}`;
+    listItem.textContent = `${user.display_name} (`;
+    listItem.appendChild(link);
+    listItem.appendChild(document.createTextNode(")"));
+    list.appendChild(listItem);
+  });
+}
+
+function onSubmit(event) {
+  event.preventDefault();
+  const userId = document.getElementById("user-id-input").value;
+  const instanceInput = document.getElementById("instance-input").value.trim();
+  const mastodonInstanceURL = instanceInput.startsWith("http")
+    ? instanceInput
+    : `https://${instanceInput.replace(/^@/, "")}`;
+  getNonFollowers(userId, mastodonInstanceURL);
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("user-id-form");
+  form.addEventListener("submit", onSubmit);
+});

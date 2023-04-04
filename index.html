@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unfollowers</title>
+  <!-- <link rel="stylesheet" href="main.css"> -->
+  <script src="main.js"></script>
+</head>
+<body>
+  <h1>MastoNon</h1>
+  <h2>Discover who isn't following you back on Mastodon!</h2>
+  <form id="user-id-form">
+    <label for="user-id-input">Enter your User ID:</label>
+    <input type="text" id="user-id-input" required>
+    <br>
+    <label for="instance-input">Enter your Mastodon instance (e.g., indieweb.social):</label>
+    <input type="text" id="instance-input" required>
+    <br>
+    <button type="submit">Check Non-Followers</button>
+  </form>
+  <ul id="non-followers-list"></ul>
+</body>
+</html>
