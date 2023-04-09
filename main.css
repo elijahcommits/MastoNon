@@ -93,6 +93,13 @@ a:hover {
   text-decoration: underline;
 }
 
+/* utility */
+
+.hidden {
+  display: none;
+}
+
+
 /* specific */
 
 #non-followers-list {
