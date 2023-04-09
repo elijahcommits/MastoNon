@@ -34,13 +34,37 @@ function displayNonFollowers(nonFollowers, mastodonInstanceURL) {
 
   nonFollowers.forEach(user => {
     const listItem = document.createElement("li");
+    listItem.id = "non-followers-list--item";
+
+    const displayName = document.createElement("h3");
+    displayName.id = "non-followers-list--display-name";
+
+    const bio = document.createElement("p");
+    bio.id = "non-followers-list--bio";
+
     const link = document.createElement("a");
+    link.id = "non-followers-list--user-link";
+
+    const avatar = document.createElement("img");
+    avatar.id = "non-followers-list--user-avatar";
+
     const remoteUsername = user.acct;
+    const remoteAvatar = user.avatar_static;
+    const remoteDisplayName = user.display_name;
+    const remoteBio = user.note;
+    
     link.href = `${mastodonInstanceURL}/@${remoteUsername}`;
     link.textContent = `@${remoteUsername}`;
-    listItem.textContent = `${user.display_name} (`;
+    avatar.src = `${remoteAvatar}`;
+    displayName.textContent = `${remoteDisplayName}`;
+    bio.innerHTML = `${remoteBio}`;
+
+    // listItem.textContent = `${user.display_name}`;
+    listItem.appendChild(avatar);
+    listItem.appendChild(displayName);
     listItem.appendChild(link);
-    listItem.appendChild(document.createTextNode(")"));
+    listItem.appendChild(bio);
+
     list.appendChild(listItem);
   });
 }

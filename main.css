@@ -1,3 +1,5 @@
+/* general */
+
 * {
   margin: 0;
   padding: 0;
@@ -89,4 +91,27 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+/* specific */
+
+#non-followers-list {
+  margin-top: 1.33rem;
+}
+
+#non-followers-list--user-avatar {
+  max-width: 70px;
+  border-radius: 5px;
+  /* margin: 0.15rem 0.5rem; */
+}
+
+#non-followers-list--bio {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+#non-followers-list--item {
+  background-color: rgb(222, 222, 222);
+  border-radius: 10px;
+  padding: 1rem;
 }
