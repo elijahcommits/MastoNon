@@ -33,34 +33,37 @@ function displayNonFollowers(nonFollowers, mastodonInstanceURL) {
   list.innerHTML = '';
 
   nonFollowers.forEach(user => {
+    const remoteUsername = user.acct;
+    const profileLink = `${mastodonInstanceURL}/@${remoteUsername}`;
+    const remoteAvatar = user.avatar_static;
+    const remoteDisplayName = user.display_name;
+    const remoteBio = user.note;
+
     const listItem = document.createElement("li");
     listItem.id = "non-followers-list--item";
 
     const displayName = document.createElement("h3");
     displayName.id = "non-followers-list--display-name";
+    displayName.textContent = `${remoteDisplayName}`;
 
     const bio = document.createElement("p");
     bio.id = "non-followers-list--bio";
+    bio.innerHTML = `${remoteBio}`;
 
     const link = document.createElement("a");
     link.id = "non-followers-list--user-link";
+    link.href = `${profileLink}`;
+    link.textContent = `@${remoteUsername}`;
 
     const avatar = document.createElement("img");
     avatar.id = "non-followers-list--user-avatar";
-
-    const remoteUsername = user.acct;
-    const remoteAvatar = user.avatar_static;
-    const remoteDisplayName = user.display_name;
-    const remoteBio = user.note;
-    
-    link.href = `${mastodonInstanceURL}/@${remoteUsername}`;
-    link.textContent = `@${remoteUsername}`;
     avatar.src = `${remoteAvatar}`;
-    displayName.textContent = `${remoteDisplayName}`;
-    bio.innerHTML = `${remoteBio}`;
 
-    // listItem.textContent = `${user.display_name}`;
-    listItem.appendChild(avatar);
+    const avatarLink = document.createElement("a");
+    avatarLink.href = profileLink;
+    avatarLink.appendChild(avatar);
+
+    listItem.appendChild(avatarLink);
     listItem.appendChild(displayName);
     listItem.appendChild(link);
     listItem.appendChild(bio);
@@ -68,6 +71,7 @@ function displayNonFollowers(nonFollowers, mastodonInstanceURL) {
     list.appendChild(listItem);
   });
 }
+
 
 
 function onSubmit(event) {
